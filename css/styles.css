@@ -1,0 +1,31 @@
+.left {
+  border-left: 2px solid black;
+}
+
+.right {
+  border-right: 2px solid black;
+}
+
+.bottom {
+  border-bottom: 2px solid black;
+}
+
+.top {
+  border-top: 2px solid black;
+}
+
+.col-xs-4 {
+  width: 33.33%;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.container {
+  margin-top: 50px;
+  border: 2px solid black;
+}
+
+p {
+  font-family: monospace;
+  font-size: 25px;
+}
