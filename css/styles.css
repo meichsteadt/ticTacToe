@@ -34,7 +34,7 @@ p {
   font-size: 200px;
 }
 
-#board {
+#board, #difficulty {
   display: none;
 }
 
@@ -42,13 +42,14 @@ p {
   display: none;
 }
 
-#player1:hover, #player2:hover {
+#player1:hover, #player2:hover, #easy:hover, #hard:hover {
   display: block;
   text-decoration: underline;
   cursor: pointer;
 }
 
-#player1:hover .secret, #player2:hover .secret {
+#player1:hover .secret, #player2:hover .secret,
+#easy:hover .secret, #hard:hover .secret {
   display: inline;
 }
 

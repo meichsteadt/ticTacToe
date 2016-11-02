@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/jquery.js" charset="utf-8"></script>
     <script src="js/bootstrap.js" charset="utf-8"></script>
-    <script src="js/scripts.js" charset="utf-8"></script>
+    <script src="js/computer.js" charset="utf-8"></script>
   </head>
   <body>
-    <div id="playerSelect">
+    <div id="welcome">
       <div class="container">
         <div class="jumbotron text-center">
           <h1>Welcome to Tic-Tac-Toe</h1>
         </div>
-        <div class="row text-center">
+        <div class="row text-center" id="playerSelect">
           <div class="col-md-12">
             <h2>Select number of players</h2>
             <div class="underline"></div>
@@ -25,6 +25,18 @@
           </div>
           <div class="col-md-6 col-md-offset-3">
             <h3 id="player2"><span class="secret">></span>2 Players</h3>
+          </div>
+        </div>
+        <div class="row text-center" id="difficulty">
+          <div class="col-md-12">
+            <h2>Select difficulty</h2>
+            <div class="underline"></div>
+          </div>
+          <div class="col-md-6 col-md-offset-3">
+            <h3 id="easy"><span class="secret">></span>Easy</h3>
+          </div>
+          <div class="col-md-6 col-md-offset-3">
+            <h3 id="hard"><span class="secret">></span>Hard</h3>
           </div>
         </div>
       </div>

@@ -4,10 +4,6 @@ function Player(mark, turn) {
   this.turn = turn;
 }
 
-// Player.prototype.mark = function () {
-//   return this.mark;
-// };
-
 var playerX = new Player("X", true);
 var playerO = new Player("O", false);
 var positions = ["", "", "", "", "", "", "", "", "",];
@@ -114,7 +110,6 @@ function easyComputer() {
   }
   return desiredPosition;
 }
-easyComputer();
 // ------------------- User Logic ------------------
 $(function() {
   var squares = ["square0", "square1", "square2", "square3", "square4", "square5", "square6", "square7", "square8"];
@@ -124,6 +119,8 @@ $(function() {
     $("#" +  square).one("click", function() {
       var mark = playerTurn();
       $("#" +  square).find('p').text(mark);
+      $('#'+square).find('p').hide();
+      $('#'+square).find('p').fadeIn(1000);
       $("#turn").text("It is " + displayTurn() + "\'s turn");
       positions[squareNumber] = mark;
       console.log(checkWin());
@@ -135,16 +132,51 @@ $(function() {
           $('#square'+pattern).addClass('highlight');
         });
         $("#turn").text(checkWin());
+        computer = false;
       }
+    if(computer) {
+      var mark = playerTurn();
+      if(difficult) {
+        var computerPosition = hardComputer();
+      }
+      else {
+        var computerPosition = easyComputer();
+      }
+      $('#square'+computerPosition).find('p').text(mark);
+      $('#square'+computerPosition).find('p').hide();
+      $('#square'+computerPosition).find('p').fadeIn(1000);
+      $("#turn").text("It is " + displayTurn() + "\'s turn");
+      positions[computerPosition] = mark;
+      if(checkWin()) {
+        squares.forEach(function(square) {
+         $("#" +  square).off("click");
+        });
+        winningPatterns.forEach(function(pattern) {
+          $('#square'+pattern).addClass('highlight');
+        });
+        $("#turn").text(checkWin());
+      }
+    }
     });
-
   });
+
   $('#player1').click(function() {
-    $('#board').fadeIn(1000);
+    $('#difficulty').fadeIn(1000);
     $('#playerSelect').hide();
+    computer = true;
   });
   $('#player2').click(function() {
     $('#board').fadeIn(1000);
     $('#playerSelect').hide();
   });
-})
+  $('#easy').click(function() {
+    $('#board').fadeIn(1000);
+    $('#welcome').hide();
+    difficult = false;
+  });
+  $('#hard').click(function() {
+    $('#board').fadeIn(1000);
+    $('#welcome').hide();
+    difficult = true;
+  });
+});
