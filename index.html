@@ -10,22 +10,43 @@
     <script src="js/scripts.js" charset="utf-8"></script>
   </head>
   <body>
-    <h1 class="text-center">It is <span id="turn"></span>turn</h1>
-    <div class="container text-center">
-      <div class="row">
-        <div class="col-xs-4 bottom" id="square0"></div>
-        <div class="col-xs-4 left right bottom" id="square1"></div>
-        <div class="col-xs-4 bottom" id="square2"></div>
+    <div id="playerSelect">
+      <div class="container">
+        <div class="jumbotron text-center">
+          <h1>Welcome to Tic-Tac-Toe</h1>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-12">
+            <h2>Select number of players</h2>
+            <div class="underline"></div>
+          </div>
+          <div class="col-md-6 col-md-offset-3">
+            <h3 id="player1"><span class="secret">></span>1 Player</h3>
+          </div>
+          <div class="col-md-6 col-md-offset-3">
+            <h3 id="player2"><span class="secret">></span>2 Players</h3>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-xs-4 bottom" id="square3"></div>
-        <div class="col-xs-4 left right bottom" id="square4"></div>
-        <div class="col-xs-4 bottom" id="square5"></div>
-      </div>
-      <div class="row">
-        <div class="col-xs-4" id="square6"></div>
-        <div class="col-xs-4 left right" id="square7"></div>
-        <div class="col-xs-4" id="square8"></div>
+    </div>
+    <div id="board">
+      <h1 class="text-center"><span id="turn"></span></h1>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-xs-4 bottom" id="square0"><p></p></div>
+          <div class="col-xs-4 left right bottom" id="square1"><p></p></div>
+          <div class="col-xs-4 bottom" id="square2"><p></p></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 bottom" id="square3"><p></p></div>
+          <div class="col-xs-4 left right bottom" id="square4"><p></p></div>
+          <div class="col-xs-4 bottom" id="square5"><p></p></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4" id="square6"><p></p></div>
+          <div class="col-xs-4 left right" id="square7"><p></p></div>
+          <div class="col-xs-4" id="square8"><p></p></div>
+        </div>
       </div>
     </div>
   </body>

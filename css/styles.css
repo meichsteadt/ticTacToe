@@ -1,3 +1,7 @@
+body {
+  font-family: monospace;
+}
+
 .left {
   border-left: 2px solid black;
 }
@@ -6,7 +10,7 @@
   border-right: 2px solid black;
 }
 
-.bottom {
+.bottom, .underline{
   border-bottom: 2px solid black;
 }
 
@@ -20,12 +24,35 @@
   margin: 0 auto;
 }
 
-.container {
+#board .container {
   margin-top: 50px;
   border: 2px solid black;
 }
 
 p {
   font-family: monospace;
-  font-size: 25px;
+  font-size: 200px;
+}
+
+#board {
+  display: none;
+}
+
+.secret {
+  display: none;
+}
+
+#player1:hover, #player2:hover {
+  display: block;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#player1:hover .secret, #player2:hover .secret {
+  display: inline;
+}
+
+.highlight {
+  background-color: rgba(255, 251, 204, .9);
+
 }
