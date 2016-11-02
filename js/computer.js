@@ -110,6 +110,10 @@ function easyComputer() {
   }
   return desiredPosition;
 }
+
+function hardComputer() {
+
+}
 // ------------------- User Logic ------------------
 $(function() {
   var squares = ["square0", "square1", "square2", "square3", "square4", "square5", "square6", "square7", "square8"];
