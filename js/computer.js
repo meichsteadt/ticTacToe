@@ -111,7 +111,6 @@ function easyComputer() {
   return desiredPosition;
 }
 
-
 //Look through array and see if there are two or more in the same row
 function winRow(array, marker) {
   var row1 = 0, row2 = 0, row3 = 0;
@@ -132,7 +131,6 @@ function winRow(array, marker) {
       if(row2 > 1) {
         for(var j=3; j<6;j++) {
           if(array[j].length === 0) {
-            console.log(i);
             desiredPosition = j;
           }
         }
@@ -219,57 +217,43 @@ function takeMiddle(array) {
 
 function takeCorner(array) {
   var desiredPosition;
-  if(array[4].length !== 0) {
-    if(array[0] !== array[8] && array[0].length !== 0) {
-      desiredPosition = Math.round(Math.random() * 8);
-      while(desiredPosition%2 !==0 || array[desiredPosition].length !== 0) {
-        desiredPosition = (Math.round(Math.random()) * 8);
-      }
-    }
+  var spotsTaken = "";
+  array.forEach(function(spot) {
+    spotsTaken+=spot;
+  })
+  if(array[4].length !== 0 && spotsTaken.length === 1)  {
+    desiredPosition = 0;
   }
   return desiredPosition;
 }
 
-var fakeGame = ["","o","o",
-                "","","",
-                "","",""];
-console.log(hardComputer(fakeGame, "o", "x"));
+
 function hardComputer(array, computerMark, playerMark) {
-  console.log(array);
   if(winRow(array, computerMark)|| winRow(array, computerMark) === 0) {
-    console.log("winRow");
     return winRow(array, computerMark);
   }
   else if (winCol(array, computerMark) || winCol(array, computerMark) === 0) {
-    console.log("winCol");
     return winCol(array, computerMark);
   }
   else if(winDiag(array, computerMark) || winDiag(array, computerMark) === 0) {
-    console.log("winDiag");
     return winDiag(array, computerMark);
   }
   else if(winRow(array, playerMark) || winRow(array, playerMark) === 0) {
-    console.log("blockRow");
     return winRow(array, playerMark);
   }
   else if (winCol(array, playerMark) || winCol(array, playerMark) === 0) {
-    console.log("blockCol");
     return winCol(array, playerMark);
   }
   else if(winDiag(array, playerMark) || winDiag(array, playerMark) === 0) {
-    console.log("blockDiag");
     return winDiag(array, playerMark);
   }
   else if(takeMiddle(array)) {
-    console.log("middle");
     return takeMiddle(array);
   }
-  else if(takeCorner(array)) {
-    console.log("corner");
+  else if(takeCorner(array) || takeCorner(array) ===  0) {
     return takeCorner(array);
   }
   else {
-    console.log("random");
     return easyComputer();
   }
 }
@@ -290,7 +274,6 @@ $(function() {
       $('#'+square).find('p').fadeIn(1000);
       $("#turn").text("It is " + displayTurn() + "\'s turn");
       positions[squareNumber] = mark;
-      console.log(checkWin());
       if(checkWin()) {
         squares.forEach(function(square) {
          $("#" +  square).off("click");
@@ -314,6 +297,7 @@ $(function() {
       $('#square'+computerPosition).find('p').fadeIn(1000);
       $("#turn").text("It is " + displayTurn() + "\'s turn");
       positions[computerPosition] = mark;
+      $("#square"+computerPosition).off("click");
       if(checkWin()) {
         squares.forEach(function(square) {
          $("#" +  square).off("click");
@@ -335,6 +319,7 @@ $(function() {
   $('#player2').click(function() {
     $('#board').fadeIn(1000);
     $('#playerSelect').hide();
+    computer = false;
   });
   $('#easy').click(function() {
     $('#board').fadeIn(1000);
