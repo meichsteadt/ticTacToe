@@ -113,11 +113,9 @@ function easyComputer() {
 
 
 //Look through array and see if there are two or more in the same row
-fakeGame = ["","x","x","","","","","",""];
-console.log(winRow(fakeGame, "x"));
 function winRow(array, marker) {
   var row1 = 0, row2 = 0, row3 = 0;
-  var desiredPosition = 0;
+  var desiredPosition;
   for(var i = 0; i<array.length;i++){
     if(i < 3 && array[i] === marker) {
       row1++;
@@ -129,15 +127,152 @@ function winRow(array, marker) {
         }
       }
     }
+    else if(i < 6 && i >= 3 && array[i] === marker) {
+      row2++;
+      if(row2 > 1) {
+        for(var j=3; j<6;j++) {
+          if(array[j].length === 0) {
+            console.log(i);
+            desiredPosition = j;
+          }
+        }
+      }
+    }
+    else if(i < 9 && i >= 6 && array[i] === marker) {
+      row3++;
+      if(row3 > 1) {
+        for(var j=6; j<9;j++) {
+          if(array[j].length === 0) {
+            desiredPosition = j;
+          }
+        }
+      }
+    }
   }
   return desiredPosition;
 }
 
-function hardComputer() {
-
+function winCol(array, marker) {
+  var col1 = 0, col2 = 0, col3 = 0;
+  var desiredPosition;
+  for(var i = 0; i<array.length;i++){
+    if(i % 3 === 0 && array[i] === marker) {
+      col1++;
+      if(col1 > 1) {
+        for(var j=0; j<9;j+=3) {
+          if(array[j].length === 0) {
+            desiredPosition = j;
+          }
+        }
+      }
+    }
+    else if(i % 3 === 1 && array[i] === marker) {
+      col2++;
+      if(col2 > 1) {
+        for(var j=1; j<9;j+=3) {
+          if(array[j].length === 0) {
+            desiredPosition = j;
+          }
+        }
+      }
+    }
+    else if(i % 3 === 2 && array[i] === marker) {
+      col3++;
+      if(col3 > 1) {
+        for(var j=2; j<9;j+=3) {
+          if(array[j].length === 0) {
+            desiredPosition = j;
+          }
+        }
+      }
+    }
+  }
+  return desiredPosition;
 }
 
+function winDiag(array, marker) {
+  var desiredPosition;
+    if(array[4] === marker) {
+      if(array[4] === array[8] && array[0].length === 0) {
+        desiredPosition = 0;
+      }
+      else if(array[4] === array[0] && array[8].length === 0) {
+        desiredPosition = 8;
+      }
+      else if(array[4] === array[2] && array[6].length === 0) {
+        desiredPosition = 6;
+      }
+      else if(array[4] === array[6] && array[2].length === 0) {
+        desiredPosition = 2;
+      }
+    }
+  return desiredPosition;
+}
 
+function takeMiddle(array) {
+  var desiredPosition;
+  if(array[4].length === 0) {
+    desiredPosition = 4;
+  }
+  return desiredPosition;
+}
+
+function takeCorner(array) {
+  var desiredPosition;
+  if(array[4].length !== 0) {
+    if(array[0] !== array[8] && array[0].length !== 0) {
+      desiredPosition = Math.round(Math.random() * 8);
+      while(desiredPosition%2 !==0 || array[desiredPosition].length !== 0) {
+        desiredPosition = (Math.round(Math.random()) * 8);
+      }
+    }
+  }
+  return desiredPosition;
+}
+
+var fakeGame = ["","o","o",
+                "","","",
+                "","",""];
+console.log(hardComputer(fakeGame, "o", "x"));
+function hardComputer(array, computerMark, playerMark) {
+  console.log(array);
+  if(winRow(array, computerMark)|| winRow(array, computerMark) === 0) {
+    console.log("winRow");
+    return winRow(array, computerMark);
+  }
+  else if (winCol(array, computerMark) || winCol(array, computerMark) === 0) {
+    console.log("winCol");
+    return winCol(array, computerMark);
+  }
+  else if(winDiag(array, computerMark) || winDiag(array, computerMark) === 0) {
+    console.log("winDiag");
+    return winDiag(array, computerMark);
+  }
+  else if(winRow(array, playerMark) || winRow(array, playerMark) === 0) {
+    console.log("blockRow");
+    return winRow(array, playerMark);
+  }
+  else if (winCol(array, playerMark) || winCol(array, playerMark) === 0) {
+    console.log("blockCol");
+    return winCol(array, playerMark);
+  }
+  else if(winDiag(array, playerMark) || winDiag(array, playerMark) === 0) {
+    console.log("blockDiag");
+    return winDiag(array, playerMark);
+  }
+  else if(takeMiddle(array)) {
+    console.log("middle");
+    return takeMiddle(array);
+  }
+  else if(takeCorner(array)) {
+    console.log("corner");
+    return takeCorner(array);
+  }
+  else {
+    console.log("random");
+    return easyComputer();
+  }
+}
 
 
 
@@ -169,7 +304,7 @@ $(function() {
     if(computer) {
       var mark = playerTurn();
       if(difficult) {
-        var computerPosition = hardComputer();
+        var computerPosition = hardComputer(positions, "O", "X");
       }
       else {
         var computerPosition = easyComputer();
