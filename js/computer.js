@@ -111,9 +111,37 @@ function easyComputer() {
   return desiredPosition;
 }
 
+
+//Look through array and see if there are two or more in the same row
+fakeGame = ["","x","x","","","","","",""];
+console.log(winRow(fakeGame, "x"));
+function winRow(array, marker) {
+  var row1 = 0, row2 = 0, row3 = 0;
+  var desiredPosition = 0;
+  for(var i = 0; i<array.length;i++){
+    if(i < 3 && array[i] === marker) {
+      row1++;
+      if(row1 > 1) {
+        for(var j=0; j<3;j++) {
+          if(array[j].length === 0) {
+            desiredPosition = j;
+          }
+        }
+      }
+    }
+  }
+  return desiredPosition;
+}
+
 function hardComputer() {
 
 }
+
+
+
+
+
+
 // ------------------- User Logic ------------------
 $(function() {
   var squares = ["square0", "square1", "square2", "square3", "square4", "square5", "square6", "square7", "square8"];
